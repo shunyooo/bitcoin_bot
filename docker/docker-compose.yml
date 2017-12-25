@@ -1,0 +1,36 @@
+version: '2'
+# 基本的にいじるところはポート設定(外から接続するデバッグ用)の箇所で良い
+# docker同士はservice名で参照し合うので、ポートは関係ない。
+services:
+  # DB。
+  db:
+    image: mysql
+    ports:
+      - "${MYSQL_PORT}:3306"
+    expose:
+      - "3306"
+    volumes:
+      - ./my.cnf:/etc/my.cnf
+    environment:
+      MYSQL_DATABASE: bitcoin
+      MYSQL_USER: btc
+      MYSQL_PASSWORD: bitcoin
+      MYSQL_ROOT_PASSWORD: bitcoin
+  # 基本アプリ
+  app:
+    # restart: always
+    build: ./
+    # docker run -tオプションに相当
+    tty: true 
+    ports:
+      - "${JUPYTER_PORT}:8888"
+    volumes:
+      - ../:${APP}
+      - ./jupyter_notebook_config.py:/root/.jupyter/jupyter_notebook_config.py
+    links:
+      - db
+    working_dir: ${APP}
+    command: 
+      bash -c "
+      python3 collect_data.py
+      "
