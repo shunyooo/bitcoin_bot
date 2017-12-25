@@ -32,5 +32,6 @@ services:
     working_dir: ${APP}
     command: 
       bash -c "
-      python3 collect_data.py
+      nohup python3 collect_data.py &
+      jupyter notebook --allow-root
       "
