@@ -6,3 +6,5 @@ pprint
 slacker
 jupyter
 pybitflyer
+matplotlib
+sympy
