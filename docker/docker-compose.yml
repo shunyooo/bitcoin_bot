@@ -32,6 +32,7 @@ services:
     working_dir: ${APP}
     command: 
       bash -c "
+      sh ./docker/wait.sh db btc bitcoin &&
       nohup python3 collect_data.py &
       jupyter notebook --allow-root
       "
