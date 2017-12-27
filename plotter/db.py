@@ -13,5 +13,5 @@ def plot_ltp(figsize=(16, 10), start=None, end=None, sec_by=None):
         @param (sec_by) default=None: 終端時間から、何秒前までのデータを取るか。
     """
     ltp = df.read_ticker(start=start, end=end, sec_by=sec_by)[["ltp"]]
-    plot(figsize=figsize)
+    ltp.plot(figsize=figsize)
     return ltp
