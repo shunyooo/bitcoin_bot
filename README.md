@@ -1,17 +1,21 @@
 # bitcoin_bot
 bitcoinの自動売買、データ取得などを行うbot。
 
-docker図はまた書く。もし、本格的に利益が出るようになったらprivateにする。
+docker図はまた書く。もし、本格的に利益が出るようになったらprivateにします。
 
-# 実行
+jupyterでの開発、知見などは[./noteboks](notebooks)より。
+
+# 実行、開発
 
 1. bitflyerでAPIキーを取得。` config/config.ini ` でキーを設定。
 2. ` docker-compose up ` 実行
+   - appコンテナとdbコンテナが起動。
    - ホストのディレクトリがdockerにマウントされるので、開発が容易。
    - http://localhost:4444 で、jupyterでの開発が可能
    - DBはホストからアクセスする場合は、mysql://btc:bitcoin@localhost:3333/bitcoinから。
      dockerからアクセスする場合はmysql://btc:bitcoin@db:3306/bitcoinから。
-   - 実行した段階で、自動でbitflyerからtickerをバッチで取得し、DBに突っ込んでいく。
+   - 実行した段階で、自動でbitflyerからtickerをバッチで取得し、dockerのDBに突っ込んでいく。
+3. ​
 
 
 
@@ -21,6 +25,16 @@ docker図はまた書く。もし、本格的に利益が出るようになっ�
 2. `docker-compose up`
 3. ファイアーウォールなど、3333, 4444ポートを解放しておく。
 4. あとはコンソール切ってOK。ttyをFalseにしているので、バックグラウンドで回る。
+
+## 他のDBサーバを使う場合
+1. どっかのサーバでssh,  `git clone`
+2. `config/config.ini`のdb設定を書き換え。
+3. `docker-compose up app`
+4. ファイアーウォールなど、4444ポートを解放しておく。
+5. あとはコンソール切ってOK。ttyをFalseにしているので、バックグラウンドで回る。
+
+
+
 
 # TODO
 
