@@ -30,8 +30,11 @@ def main():
                 ticker.ltp, SPAN_SEC))
         except Exception as e:
             traceback_str = traceback.format_exc()
+            title = "エラー検出"
             info = "{}\n{}".format(str(e), traceback_str)
-            slack.post(info, color="danger")
+            slack.post(info, title=title, color="danger")
+            logger.debug(info)
+
 
 if __name__ == '__main__':
     if AUTO_COLLECT:
