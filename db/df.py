@@ -3,9 +3,15 @@ import datetime
 from .utils import engine
 
 
-def filter_by_date(df, from_date, to_date):
-    # 時期で絞る
-    return df.ix[from_date, to_date]
+def filter_sec_from_end(df, sec_by, end=None):
+    # 終端時間（デフォルト最新時間）までの秒数指定で抽出
+    if end is None:
+        end = df.index.max()
+
+    # 終端時間からの秒数で指定。
+    end_by = end - datetime.timedelta(seconds=sec_by)
+    end_by = end_by.strftime('%Y-%m-%d %H:%M:%S')
+    return df.loc[end_by:]
 
 
 def max_timestamp(table):
