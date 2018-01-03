@@ -70,10 +70,14 @@ def read_ticker(start=None, end=None, sec_by=None):
     t_df = pd.read_sql(query, engine,
                        parse_dates=["timestamp"],
                        index_col=["timestamp"])
+    t_df = t_df.tz_localize('UTC').tz_convert('Asia/Tokyo')
+
     if sec_by is not None:
         # 終端時間からの秒数で指定。
         end_by = t_df.index.max() - datetime.timedelta(seconds=sec_by)
         end_by = end_by.strftime('%Y-%m-%d %H:%M:%S')
         t_df = t_df.loc[end_by:]
+    elif start is not None:
+        t_df = t_df.loc[start:]
 
     return t_df
