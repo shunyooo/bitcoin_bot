@@ -28,10 +28,12 @@ def polyfit(x, y, deg):
             logger.warning("{}は学習データ範囲[{},{}]外です。".format(x, x_min, x_max))
 
     def poly(x):
+        # 近似曲線
         check_valid(x)
         return np.poly1d(weights)(x - x_mean)
 
     def grad(x):
+        # 近似曲線の勾配
         check_valid(x)
         return np.poly1d(weights).deriv()(x - x_mean)
 
