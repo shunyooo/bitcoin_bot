@@ -5,6 +5,8 @@ pandas
 pprint
 slacker
 jupyter
+jupyter_contrib_nbextensions
 pybitflyer
 matplotlib
 sympy
+pyyaml

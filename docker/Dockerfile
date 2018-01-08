@@ -46,6 +46,13 @@ ENV PYTHONIOENCODING utf_8
 
 # jupyterの設定
 RUN jupyter notebook --generate-config
+# jupyter extention系
+RUN jupyter contrib nbextension install --user
+RUN git clone https://github.com/ipython-contrib/IPython-notebook-extensions\
+    && cd IPython-notebook-extensions\
+    && sudo python3 setup.py install\
+    && cd ../\
+    && rm -rf IPython-notebook-extensions
 
 # ローカル時間を東京に変更
 # RUN echo "Asia/Tokyo" | tee /etc/timezone \
